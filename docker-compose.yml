@@ -1,0 +1,12 @@
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/home/appuser/app:Z
+      - ./.docker/zsh/powerlevel10k/.p10k.zsh:/home/appuser/.p10k.zsh:Z
+      - ./.docker/zsh/history:/home/appuser/zsh:Z
+    ports:
+      - "8081:8080"
+    restart: always
+    
