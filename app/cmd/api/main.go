@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -11,6 +10,7 @@ import (
 	"app/app/internal/handlers"
 	"app/app/internal/repositories"
 	"app/app/internal/services"
+	"app/app/cmd/cli"
 )
 
 func main() {
@@ -65,12 +65,13 @@ func main() {
 	router.HandleFunc("/reports/antivirus-com-problema", reportHandler.EquipmentWithAntivirusProblemsHandler).Methods(http.MethodGet)
 	router.HandleFunc("/reports/juncao", reportHandler.InventoryEquipmentAntivirusUnifiedHandler).Methods(http.MethodGet)
 
-	fmt.Println("Banco SQLite conectado em data/inventory.db")
-	fmt.Println("API de inventário iniciada na porta 8080")
-
 	// Iniciando o servidor HTTP na porta 8080.
-	err = http.ListenAndServe(":8080", router)
-	if err != nil {
-		log.Fatal(err)
-	}
+	go func() {
+		err = http.ListenAndServe(":8080", router)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	cli.CliInterface()
 }

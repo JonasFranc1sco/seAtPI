@@ -1,37 +1,41 @@
-package main
+package cli
 
 import (
-	"charm.land/huh/v2"
+	"app/app/cmd/cli/components/screens"
+	"fmt"
 	"log"
 
-	"app/app/cmd/cli/components/screens"
+	"charm.land/huh/v2"
 )
 
-
-func main() {
+func CliInterface() {
 	var option string
 	form := huh.NewForm(
 		huh.NewGroup(
 			huh.NewSelect[string]().
-			Title("Escolha qual ação deseja executar.").
-			Options(
-				huh.NewOption("Importar CSV do inventário.", "inventario"),
-				huh.NewOption("Importar CSV do antivírus.", "antivirus"),
-				huh.NewOption("Importar CSV do equipamento.", "equipamento"),
-				huh.NewOption("Exportar CSV do relatório completo.", "relatorio"),
-			).
-			Value(&option),
+				Title("Escolha qual ação deseja executar.").
+				Options(
+					huh.NewOption("Importar CSV do inventário.", "inventario"),
+					huh.NewOption("Importar CSV do antivírus.", "antivirus"),
+					huh.NewOption("Importar CSV do equipamento.", "equipamento"),
+					huh.NewOption("Exportar CSV do relatório completo.", "relatorio"),
+				).
+				Value(&option),
 		),
 	)
-	
+
 	err := form.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
-	switch option {
-	case "antivirus":
-		if err := screens.ImportInputName(); err != nil {
+
+	if option != "relatorio" {
+		if err := screens.ImportInputName(option); err != nil {
 			log.Fatal(err)
 		}
 	}
+
+	screens.ExportInputName()
+
+	fmt.Println("OK")
 }

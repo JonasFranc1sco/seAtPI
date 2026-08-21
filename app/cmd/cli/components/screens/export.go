@@ -1,16 +1,28 @@
 package screens
 
-import "charm.land/huh/v2"
+import (
+	"app/app/cmd/cli/components/ui"
+	"fmt"
+	"log"
+	"os/exec"
+)
 
 func ExportInputName() {
-	var name string
+	path := ui.ImportInputName()
+	fileName := fmt.Sprintf("%s.csv", path)
 
-	huh.NewGroup(
-		huh.NewInput().
-			Title("Como quer nomear o relatório?").
-			Prompt("?").
-			Value(&name),
+	// Monta o comando pra exportar os arquivos
+	cmd := exec.Command(
+		"curl",
+		"-o",
+		fileName,
+		"http://localhost:8080/reports/juncao",
 	)
+
+	// Roda o comando
+	err := cmd.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
-
-
