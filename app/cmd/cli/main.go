@@ -3,12 +3,13 @@ package main
 import (
 	"charm.land/huh/v2"
 	"log"
+
+	"app/app/cmd/cli/components/screens"
 )
 
 
 func main() {
 	var option string
-	
 	form := huh.NewForm(
 		huh.NewGroup(
 			huh.NewSelect[string]().
@@ -26,5 +27,11 @@ func main() {
 	err := form.Run()
 	if err != nil {
 		log.Fatal(err)
+	}
+	switch option {
+	case "antivirus":
+		if err := screens.ImportInputName(); err != nil {
+			log.Fatal(err)
+		}
 	}
 }
