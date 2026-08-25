@@ -17,7 +17,7 @@ func CliInterface() {
 				Options(
 					huh.NewOption("Importar CSV do inventário.", "inventario"),
 					huh.NewOption("Importar CSV do antivírus.", "antivirus"),
-					huh.NewOption("Importar CSV do equipamento.", "equipamento"),
+					huh.NewOption("Importar CSV do equipamento.", "patrimonio"),
 					huh.NewOption("Exportar CSV do relatório completo.", "relatorio"),
 				).
 				Value(&option),
@@ -34,8 +34,10 @@ func CliInterface() {
 			log.Fatal(err)
 		}
 	}
-
-	screens.ExportInputName()
+	switch option {
+	case "relatorio":
+		screens.ExportInputName()
+	}
 
 	fmt.Println("OK")
 }

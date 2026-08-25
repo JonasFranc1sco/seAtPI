@@ -11,6 +11,10 @@ func ExportInputName() {
 	path := ui.ImportInputName()
 	fileName := fmt.Sprintf("%s.csv", path)
 
+	ExportCommand(fileName)
+}
+
+func ExportCommand(fileName string) {
 	// Monta o comando pra exportar os arquivos
 	cmd := exec.Command(
 		"curl",
