@@ -1,4 +1,4 @@
-package filepicker
+package components
 
 import (
 	"errors"
