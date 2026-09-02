@@ -2,7 +2,6 @@ package components
 
 import (
 	"app/app/cmd/cli/components/screens"
-	"fmt"
 	"log"
 
 	"charm.land/huh/v2"

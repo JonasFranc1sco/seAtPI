@@ -6,11 +6,11 @@ import (
 
 	"github.com/gorilla/mux"
 
+	"app/app/cmd/cli"
 	"app/app/internal/database"
 	"app/app/internal/handlers"
 	"app/app/internal/repositories"
 	"app/app/internal/services"
-	"app/app/cmd/cli"
 )
 
 func main() {
@@ -73,5 +73,5 @@ func main() {
 		}
 	}()
 
-	cli.CliInterface()
+	cli.Interface()
 }

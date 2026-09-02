@@ -1,4 +1,4 @@
-package components
+package screens
 
 import (
 	"errors"
@@ -82,7 +82,7 @@ func (m model) View() tea.View {
 	return v
 }
 
-func PickFile() (string) {
+func PickFile() string {
 	fp := filepicker.New()
 	fp.AllowedTypes = []string{".csv"}
 	fp.CurrentDirectory, _ = os.UserHomeDir()
@@ -90,7 +90,7 @@ func PickFile() (string) {
 	m := model{filepicker: fp}
 	tm, _ := tea.NewProgram(m).Run()
 	mm := tm.(model)
-	fmt.Println("\n  You selected: " + m.filepicker.Styles.Selected.Render(mm.selectedFile) + "\n") 
+	fmt.Println("\n  You selected: " + m.filepicker.Styles.Selected.Render(mm.selectedFile) + "\n")
 
 	return mm.selectedFile
 }
